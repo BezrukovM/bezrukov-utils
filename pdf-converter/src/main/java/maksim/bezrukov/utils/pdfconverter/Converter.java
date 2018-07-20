@@ -4,11 +4,7 @@ import com.sun.star.comp.helper.BootstrapException;
 import com.sun.star.uno.Exception;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Maksim Bezrukov
@@ -39,7 +35,9 @@ public class Converter {
 			for (File f : files) {
 				if (f.isDirectory()) {
 					File similarPDFDir = new File(pdfDir, f.getName());
-					similarPDFDir.mkdirs();
+					if (!similarPDFDir.exists() && !similarPDFDir.mkdirs()) {
+						throw new IllegalStateException("Can't create dir " + similarPDFDir.getAbsolutePath());
+					}
 					res += convert(f, similarPDFDir);
 				} else if (OpenOfficeUtil.isSupportedExtension(f.getName()) && convertFile(f, pdfDir) != null) {
 					++res;

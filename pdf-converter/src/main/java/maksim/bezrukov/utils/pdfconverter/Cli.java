@@ -35,7 +35,8 @@ public class Cli {
 		}
 		OpenOfficeUtil.officeDirectory = cliArgParser.getOfficeDir();
 		Converter converter = new Converter(resDir);
-		converter.convert(dirToFilter);
+		long converted = converter.convert(dirToFilter);
+		System.out.println("Total files converted: " + converted);
 	}
 
 	private static void displayHelpAndExit(JCommander jCommander, int i) {
