@@ -4,7 +4,6 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 
 import java.io.File;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
