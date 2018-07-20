@@ -9,22 +9,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>files-filter</artifactId>
+    <artifactId>pdf-converter</artifactId>
 
     <properties>
-        <jar.module.name>files-filter</jar.module.name>
+        <jar.module.name>pdf-converter</jar.module.name>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <commons-io.version>2.5</commons-io.version>
         <jcommander.version>1.72</jcommander.version>
+        <bootstrap-connector.version>0.1.1</bootstrap-connector.version>
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openoffice/bootstrap-connector -->
+        <dependency>
+            <groupId>org.openoffice</groupId>
+            <artifactId>bootstrap-connector</artifactId>
+            <version>${bootstrap-connector.version}</version>
         </dependency>
 
         <dependency>
@@ -48,7 +55,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>maksim.bezrukov.utils.filesfilter.Cli</mainClass>
+                            <mainClass>maksim.bezrukov.utils.pdfconverter.Cli</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

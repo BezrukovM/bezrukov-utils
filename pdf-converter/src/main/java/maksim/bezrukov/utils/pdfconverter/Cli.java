@@ -1,12 +1,9 @@
-package maksim.bezrukov.utils.filesfilter;
+package maksim.bezrukov.utils.pdfconverter;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 
 import java.io.File;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author Maksim Bezrukov
@@ -14,7 +11,7 @@ import java.util.stream.Collectors;
 public class Cli {
 
 	public static void main(String[] args) {
-		FilterArgParser cliArgParser = new FilterArgParser();
+		CliArgParser cliArgParser = new CliArgParser();
 		JCommander jCommander = new JCommander(cliArgParser);
 		try {
 			jCommander.parse(args);
@@ -36,10 +33,9 @@ public class Cli {
 			System.err.println("Specified directory for filtering path either doesn't exist or is not a directory.");
 			displayHelpAndExit(jCommander, 1);
 		}
-		Set<String> extensions = cliArgParser.getExtensions().stream().map(String::toLowerCase).collect(Collectors.toSet());
-		Set<String> excludeExtensions = cliArgParser.getExcludeExtensions().stream().map(String::toLowerCase).collect(Collectors.toSet());
-		Filter filter = new Filter(resDir, extensions, excludeExtensions);
-		filter.filter(dirToFilter);
+		OpenOfficeUtil.officeDirectory = cliArgParser.getOfficeDir();
+		Converter converter = new Converter(resDir);
+		converter.convert(dirToFilter);
 	}
 
 	private static void displayHelpAndExit(JCommander jCommander, int i) {
