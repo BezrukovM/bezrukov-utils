@@ -9,13 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>pdf-converter</artifactId>
+    <artifactId>files</artifactId>
 
     <properties>
-        <jar.module.name>pdf-converter</jar.module.name>
+        <jar.module.name>files-utils</jar.module.name>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <commons-io.version>2.5</commons-io.version>
+        <commons-codec.version>1.11</commons-codec.version>
         <jcommander.version>1.72</jcommander.version>
         <bootstrap-connector.version>0.1.1</bootstrap-connector.version>
     </properties>
@@ -26,6 +27,14 @@
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.openoffice/bootstrap-connector -->
         <dependency>
@@ -55,7 +64,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>maksim.bezrukov.utils.pdfconverter.Cli</mainClass>
+                            <mainClass>maksim.bezrukov.utils.files.Cli</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

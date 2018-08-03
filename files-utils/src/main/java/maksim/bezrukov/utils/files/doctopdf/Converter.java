@@ -1,4 +1,4 @@
-package maksim.bezrukov.utils.pdfconverter;
+package maksim.bezrukov.utils.files.doctopdf;
 
 import com.sun.star.comp.helper.BootstrapException;
 import com.sun.star.uno.Exception;
@@ -9,18 +9,18 @@ import java.net.MalformedURLException;
 /**
  * @author Maksim Bezrukov
  */
-public class Converter {
+class Converter {
 
 	private final File rootForFiltered;
 
-	public Converter(File rootForFiltered) {
+	Converter(File rootForFiltered) {
 		if (!rootForFiltered.isDirectory()) {
 			throw new IllegalArgumentException("Root for filtered argument has to be an existing directory");
 		}
 		this.rootForFiltered = rootForFiltered;
 	}
 
-	public long convert(File dirToConvert) {
+	long convert(File dirToConvert) {
 		return convert(dirToConvert, this.rootForFiltered);
 	}
 

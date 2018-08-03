@@ -1,7 +1,8 @@
-package maksim.bezrukov.utils.filesfilter;
+package maksim.bezrukov.utils.files.extfilter;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import maksim.bezrukov.utils.files.Cli;
 
 import java.io.File;
 import java.util.Set;
@@ -10,11 +11,12 @@ import java.util.stream.Collectors;
 /**
  * @author Maksim Bezrukov
  */
-public class Cli {
+public class ExtFilterCli {
 
 	public static void main(String[] args) {
-		FilterArgParser cliArgParser = new FilterArgParser();
+		ExtFilterArgParser cliArgParser = new ExtFilterArgParser();
 		JCommander jCommander = new JCommander(cliArgParser);
+		jCommander.setProgramName("jarFile " + Cli.Module.EXT_FILTER.getName());
 		try {
 			jCommander.parse(args);
 		} catch (ParameterException e) {
@@ -37,8 +39,8 @@ public class Cli {
 		}
 		Set<String> extensions = cliArgParser.getExtensions().stream().map(String::toLowerCase).collect(Collectors.toSet());
 		Set<String> excludeExtensions = cliArgParser.getExcludeExtensions().stream().map(String::toLowerCase).collect(Collectors.toSet());
-		Filter filter = new Filter(resDir, extensions, excludeExtensions);
-		filter.filter(dirToFilter);
+		ExtFilter extFilter = new ExtFilter(resDir, extensions, excludeExtensions);
+		extFilter.filter(dirToFilter);
 	}
 
 	private static void displayHelpAndExit(JCommander jCommander, int i) {

@@ -1,4 +1,4 @@
-package maksim.bezrukov.utils.pdfconverter;
+package maksim.bezrukov.utils.files.doctopdf;
 
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.comp.helper.BootstrapException;
@@ -20,20 +20,20 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class OpenOfficeUtil {
+class OpenOfficeUtil {
 
     private static final Set<String> EXTENSIONS = Arrays.stream(new String[]{"doc", "docx", "xls", "xlsx", "ppt", "pptx",
             "ods", "odt", "odp", "rtf"}).collect(Collectors.toSet());
 
-    public static String officeDirectory = "";
+    static String officeDirectory = "";
 
-    public static boolean isSupportedExtension(String fileName) {
+    static boolean isSupportedExtension(String fileName) {
         int index = fileName.lastIndexOf('.');
         String extension = index > 0 && index < fileName.length()-1 ? fileName.substring(index + 1) : "";
         return EXTENSIONS.contains(extension.toLowerCase());
     }
 
-    public static void convert(File wordFile, File pdfFile) throws BootstrapException, Exception, MalformedURLException, InterruptedException {
+    static void convert(File wordFile, File pdfFile) throws BootstrapException, Exception, MalformedURLException, InterruptedException {
         XDesktop xDesktop = initialize();
         XComponent xComp = loadDocument(wordFile, xDesktop);
         saveToPDF(pdfFile, xComp);

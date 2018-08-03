@@ -1,4 +1,4 @@
-package maksim.bezrukov.utils.filesfilter;
+package maksim.bezrukov.utils.files.extfilter;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,14 +11,14 @@ import java.util.Set;
 /**
  * @author Maksim Bezrukov
  */
-public class Filter {
+class ExtFilter {
 
 	private final File rootForFiltered;
 	private final Set<String> extensions;
 	private final Set<String> excludeExtensions;
 	private final Map<String, File> dirByExt = new HashMap<>();
 
-	public Filter(File rootForFiltered, Set<String> extensions, Set<String> excludeExtensions) {
+	ExtFilter(File rootForFiltered, Set<String> extensions, Set<String> excludeExtensions) {
 		if (!rootForFiltered.isDirectory()) {
 			throw new IllegalArgumentException("Root for filtered argument has to be an existing directory");
 		}
@@ -27,7 +27,7 @@ public class Filter {
 		this.excludeExtensions = excludeExtensions == null ? Collections.emptySet() : Collections.unmodifiableSet(excludeExtensions);
 	}
 
-	public void filter(File dirToFilter) {
+	void filter(File dirToFilter) {
 		if (!dirToFilter.isDirectory()) {
 			throw new IllegalArgumentException("Dir to filter has to be an existing directory");
 		}

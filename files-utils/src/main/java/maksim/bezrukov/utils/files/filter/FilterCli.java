@@ -1,18 +1,22 @@
-package maksim.bezrukov.utils.pdfconverter;
+package maksim.bezrukov.utils.files.filter;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import maksim.bezrukov.utils.files.Cli;
 
 import java.io.File;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Maksim Bezrukov
  */
-public class Cli {
+public class FilterCli {
 
 	public static void main(String[] args) {
-		CliArgParser cliArgParser = new CliArgParser();
+		FilterArgParser cliArgParser = new FilterArgParser();
 		JCommander jCommander = new JCommander(cliArgParser);
+		jCommander.setProgramName("jarFile " + Cli.Module.FILTER.getName());
 		try {
 			jCommander.parse(args);
 		} catch (ParameterException e) {
@@ -25,7 +29,7 @@ public class Cli {
 
 		File resDir = new File(cliArgParser.getResultDirPath());
 		if (!resDir.isDirectory()) {
-			System.err.println("Specified filtered directory path either doesn't exist or is not a directory.");
+			System.err.println("Specified result directory path either doesn't exist or is not a directory.");
 			displayHelpAndExit(jCommander, 1);
 		}
 		File dirToFilter = new File(cliArgParser.getDir());
@@ -33,10 +37,9 @@ public class Cli {
 			System.err.println("Specified directory for filtering path either doesn't exist or is not a directory.");
 			displayHelpAndExit(jCommander, 1);
 		}
-		OpenOfficeUtil.officeDirectory = cliArgParser.getOfficeDir();
-		Converter converter = new Converter(resDir);
-		long converted = converter.convert(dirToFilter);
-		System.out.println("Total files converted: " + converted);
+
+		Filter filter = new Filter(resDir);
+		filter.filter(dirToFilter, cliArgParser.isRename());
 	}
 
 	private static void displayHelpAndExit(JCommander jCommander, int i) {
