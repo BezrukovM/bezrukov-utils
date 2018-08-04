@@ -39,7 +39,7 @@ class OpenOfficeUtil {
         saveToPDF(pdfFile, xComp);
 
         xDesktop.terminate();
-        Thread.sleep(1000);
+        Thread.sleep(100);
     }
 
     private static void saveToPDF(File pdfFile, XComponent xComp) throws MalformedURLException, IOException {

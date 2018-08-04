@@ -52,6 +52,7 @@ class Converter {
 		File pdfFile = new File(destination, pdfFilename);
 		if (!pdfFile.exists()) {
 			try {
+				System.out.println("Starting file convert " + document.getAbsolutePath());
 				OpenOfficeUtil.convert(document, pdfFile);
 				if (pdfFile.exists()) {
 					return pdfFile;
